@@ -7,7 +7,7 @@ using namespace std;
 #define loginTries 3
 string username;
 
-//to_string funtion, turns int to string
+//to_string funtion, turns int to string, might need later.
 string to_string(int number)
 {
 	string result;
@@ -43,11 +43,12 @@ string login()
 	}
 	return "error";
 }
-
+void incorrectChoice()
+{
+	cout<<"Incorrect input, please input only the numbers on the Menu"<<endl;
+}
 void cashierMenu()
 {
-	int choice;
-	system("CLS");
 	cout<<"----------Menu----------"<<endl
 	    <<"|                      |"<<endl
 	    <<"|1.Check Out           |"<<endl
@@ -55,20 +56,36 @@ void cashierMenu()
 	    <<"|3.Quit                |"<<endl
 	    <<"|                      |"<<endl
 	    <<"------------------------"<<endl;
-
+}
+void cashier()
+{
+	int choice;
+	bool choiceMade=false;
+	system("CLS");
+	cashierMenu();
 	cout<<"Please input your choice: ";
 	cin>>choice;
 
+
 	switch(choice)
 	{
-	case 1:checkout();break;
-	case 2:checkproducts();break;
-	case 3:quit();break;
-	default:cout<<"Incorrect input, please input only the numbers on the Menu"<<endl;cashiermenu();
+	case 1:
+		checkout();
+		break;
+	case 2:
+		checkproducts();
+		break;
+	case 3:
+		quit();
+		break;
+	default:
+		choiceMade=false;
+		//not done yet
 	}
 }
 void quit()
 {
+	system("CLS")
 	cout<<"Thank You for using our program"<<endl;
 	system("pause");
 }
@@ -107,7 +124,7 @@ int main()
 		position = login();
 	}
 	if (position == "cashier")
-		cashierMenu();
+		cashier();
 	if (position == "stocker")
 		stocker();
 	if (position == "manager")
