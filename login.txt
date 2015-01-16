@@ -1,0 +1,4 @@
+ash hunter2 cashier
+sally password cashier
+bruce password1 stocker
+richard richy manager
