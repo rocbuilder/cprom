@@ -44,12 +44,35 @@ string login()
 	return "error";
 }
 
-void cashier()
+void cashierMenu()
 {
+	int choice;
 	system("CLS");
-	cout<<"Cashier: "<<username<<endl;
+	cout<<"----------Menu----------"<<endl
+	    <<"|                      |"<<endl
+	    <<"|1.Check Out           |"<<endl
+	    <<"|2.Check Products      |"<<endl
+	    <<"|3.Quit                |"<<endl
+	    <<"|                      |"<<endl
+	    <<"------------------------"<<endl;
+
+	cout<<"Please input your choice: ";
+	cin>>choice;
+
+	switch(choice)
+	{
+	case 1:checkout();break;
+	case 2:checkproducts();break;
+	case 3:quit();break;
+	default:cout<<"Incorrect input, please input only the numbers on the Menu"<<endl;cashiermenu();
+	}
+}
+void quit()
+{
+	cout<<"Thank You for using our program"<<endl;
 	system("pause");
 }
+
 void stocker()
 {
 	system("CLS");
@@ -84,9 +107,10 @@ int main()
 		position = login();
 	}
 	if (position == "cashier")
-		cashier();
+		cashierMenu();
 	if (position == "stocker")
 		stocker();
 	if (position == "manager")
 		manager();
+	return 0;
 }
