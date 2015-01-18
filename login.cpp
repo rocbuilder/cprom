@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <fstream>
 using namespace std;
 
 #include "searchLogin.h" //login function, asks for username and password, checks login.txt, returns "error" if no match
@@ -31,4 +32,26 @@ string login()
 			break;
 	}
 	return position;
+}
+
+//returns staff position, cashier, stocker, manager
+string searchLogin(string username, string password)
+{	
+	ifstream inLogin;
+	inLogin.open("login.txt");
+	string inUsername, inPassword, inPosition;
+	
+	//search through login.txt for matching username
+	while(!inLogin.eof())
+	{
+		inLogin>>inUsername>>inPassword>>inPosition;
+		if (username==inUsername)
+		{
+			if (password==inPassword)
+				return inPosition;
+			break;
+			//break is to stop loop		
+		}
+	}
+	return "error";
 }
