@@ -1,52 +1,29 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <iomanip>
 
 using namespace std;
 
-#define loginTries 3
-string username;
+#include "to_string.h" //to_string(int) function, turns int var to string
+#include "login.h" //login() function, asks for username and password, returns staff position
 
-//to_string funtion, turns int to string, might need later.
-string to_string(int number)
+int loginTries = 3;
+string username, password;
+
+void quit()
 {
-	string result;
-	stringstream convert;
-	convert<<number;
-	return convert.str();
+	cout<<"Thank You for using our program"<<endl;
+	system("pause");
+}
+void checkOut()
+{
+}
+void checkProduct()
+{
 }
 
-//returns staff position, cashier, stocker, manager
-string login()
-{	
-	ifstream inLogin;
-	inLogin.open("login.txt");
-	string password, inUsername, inPassword, inPosition;
-	
-	cout<<"Please enter username: ";
-	cin>>username;
-	cout<<"Please enter password: ";
-	cin>>password;
-	//search through login.txt for matching username
-	while(!inLogin.eof())
-	{
-		inLogin>>inUsername>>inPassword>>inPosition;
-		if (username==inUsername)
-		{
-			if (password==inPassword)
-				return inPosition;
-			else
-				return "error";
-			break;
-			//break is to stop loop		
-		}	
-	}
-	return "error";
-}
-void incorrectChoice()
-{
-	cout<<"Incorrect input, please input only the numbers on the Menu"<<endl;
-}
+
 void cashierMenu()
 {
 	cout<<"----------Menu----------"<<endl
@@ -60,36 +37,19 @@ void cashierMenu()
 void cashier()
 {
 	int choice;
-	bool choiceMade=false;
 	system("CLS");
 	cashierMenu();
 	cout<<"Please input your choice: ";
 	cin>>choice;
 
-
 	switch(choice)
 	{
-	case 1:
-		checkout();
-		break;
-	case 2:
-		checkproducts();
-		break;
-	case 3:
-		quit();
-		break;
-	default:
-		choiceMade=false;
-		//not done yet
+	case 1:checkOut();break;
+	case 2:checkProduct();break;
+	case 3:quit();break;
+	default:cout<<"Incorrect input, please input only the numbers on the Menu"<<endl;cashier();
 	}
 }
-void quit()
-{
-	system("CLS")
-	cout<<"Thank You for using our program"<<endl;
-	system("pause");
-}
-
 void stocker()
 {
 	system("CLS");
@@ -105,24 +65,7 @@ void manager()
 int main()
 {
 	string position;
-	for (int i=0; i<=(loginTries+1); i++)
-	{
-		if (position == "error")
-		{
-			system("CLS");
-			cout<<"Incorrect Username or Password"<<endl;
-			cout<<"You have "<<loginTries - i<<" tries left"<<endl;
-			if (i==loginTries)
-			{
-				cout<<"Please try again later"<<endl;
-				system("pause");
-				return 0;
-			}
-		}
-		if (position == "cashier"||position=="stocker"||position=="manager")
-			break;
-		position = login();
-	}
+	position = login();
 	if (position == "cashier")
 		cashier();
 	if (position == "stocker")
