@@ -2,6 +2,7 @@
 #include <sstream>
 #include <fstream>
 #include <iomanip>
+#include <vector>
 
 
 using namespace std;
@@ -14,7 +15,8 @@ using namespace std;
 
 int loginTries = 3;
 string username, password;
-
+//productName, price, location, stock, id, tag, discount
+string productName; double price; vector<string> location; int stock; string id; vector<string> tag, discount;
 
 void stocker()
 {
