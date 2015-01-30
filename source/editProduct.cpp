@@ -6,7 +6,6 @@
 using namespace std;
 
 #include "editProduct.h"
-#include "searchProduct.h"
 
 //types : productName, price, location, stockto, stockby, id, tag,
 void editProduct(string search, string change, string type)
