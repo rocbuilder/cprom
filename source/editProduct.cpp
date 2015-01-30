@@ -20,24 +20,25 @@ void editProduct(string search, string change, string type)
 		will be done by opening product, search through, copy and paste to temp.txt, except the one to be edited, edit it
 		delete product, copy temp into product.
 	*/
-	if (!inProduct)
+	if (!inProduct || !temp)
 	{
-		//error msg
+		cout<<"error, product.txt not found";
 	}
 	else
 	{
-		while(!inProduct.eof())
+		//insert code that creates temp.txt?? or does opening it create it by default
+		while(!inProduct.eof()) //input from product.txt and write to temp.txt
 		{
 			inProduct>>productName>>price>>locationSerial>>stock>>id>>tagSerial;
 			
 			if(productName != search)
 			{
-				temp<<productName<<price<<locationSerial<<stock<<id<<tagSerial;
+				temp<<productName<<" "<<price<<" "<<locationSerial<<" "<<stock<<" "<<id<<" "<<tagSerial<<"\n";
 			}
 			else
 			{
 				if (type == "productName")
-					temp<<change<<price<<locationSerial<<stock<<id<<tagSerial;
+					temp<<change<<" "<<price<<" "<<locationSerial<<" "<<stock<<" "<<id<<" "<<tagSerial<<"\n";
 				if (type == "price")
 					temp<<productName<<change<<locationSerial<<stock<<id<<tagSerial;
 				if (type == "location")
@@ -58,5 +59,9 @@ void editProduct(string search, string change, string type)
 					temp<<productName<<price<<locationSerial<<stock<<id<<change;
 			}
 		}
+		inProduct.close();
+		inProduct.open("product.txt", fstream::trunc) //to clear product.txt
+		inProduct<<temp.rdbuf(); //copy temp over to product
+		temp>>"complete"; //add the string to end of temp to signify task completion and no loss of data in product.txt, could be used somewhere, perhaps on start-up
 	}
 }
