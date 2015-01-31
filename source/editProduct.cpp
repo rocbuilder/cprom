@@ -14,7 +14,7 @@ void editProduct(string search, string change, string type)
 	inProduct.open("product.txt");
 	
 	string locationSerial, tagSerial;
-	temp.open("temp.txt", fstream::trunc); //make it so that... when open, will delete contents
+	temp.open("temp.txt", fstream::trunc, fstream::app); //make it so that... when open, will delete contents
 	/*
 		will be done by opening product, search through, copy and paste to temp.txt, except the one to be edited, edit it
 		delete product, copy temp into product.
@@ -59,8 +59,8 @@ void editProduct(string search, string change, string type)
 			}
 		}
 		inProduct.close();
-		inProduct.open("product.txt", fstream::trunc) //to clear product.txt
+		inProduct.open("product.txt", fstream::trunc); //to clear product.txt
 		inProduct<<temp.rdbuf(); //copy temp over to product
-		temp>>"complete"; //add the string to end of temp to signify task completion and no loss of data in product.txt, could be used somewhere, perhaps on start-up
+		temp<<"complete"; //add the string to end of temp to signify task completion and no loss of data in product.txt, could be used somewhere, perhaps on start-up
 	}
 }
