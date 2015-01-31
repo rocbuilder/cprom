@@ -1,10 +1,3 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-using namespace std;
-
-//productName, price, location, stock, id, tag, (discount to be decided)
 #include "searchProduct.h"
 #include "deserialise.h"
 
