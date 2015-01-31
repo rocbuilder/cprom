@@ -2,6 +2,7 @@
 #include <sstream>
 #include <iomanip>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -9,9 +10,13 @@ using namespace std;
 #include "quit.h"
 #include "to_string.h"
 #include "searchProduct.h" //searchProduct(string search) function, returns 0 if successful, returns -1 if not.
+#include "editProduct.h"
 
 vector<string> checkOutList;
 vector<double> checkOutPrice;
+
+void checkOut();
+
 void checkOutMenu()
 {
 	cout<<"----------Menu----------"<<endl
@@ -39,9 +44,11 @@ void checkOutPurchase()
 	for(int i = 0; i < listLength; i++)
 	{
 		total += checkOutPrice[i];
+		editProduct(checkOutList[i], "-1", "stockby");
 	}
-	
-
+	cout<<"Total price: $"<<total<<endl;
+	system("pause");
+	checkOut();
 }
 
 void checkOut()
@@ -51,7 +58,7 @@ void checkOut()
 	string input;
 	string prevInList="0";
 	bool error = false;
-	while (input != "3")
+	while (1)
 	{
 		system("CLS");
 		checkOutMenu();
@@ -72,15 +79,20 @@ void checkOut()
 		}
 		cout<<endl<<"input: ";
 		cin>>input;
-		if (input == "1" || input == "2")
+		if (input == "1" || input == "2" || input == "3")
 		{
 			if (input == "1")
 				checkOutDelete();
-			else
-				{
-					checkOutPurchase();
-					break;
-				}
+			if (input == "2")
+			{
+				checkOutPurchase();
+				break;
+			}
+			if (input == "3")
+			{
+				cashier();
+				break;
+			}
 		}
 		else
 		{
@@ -91,9 +103,7 @@ void checkOut()
 				checkOutPrice.push_back(price/100);
 			}
 			else
-				error = true;
-			
-			
+				error = true;			
 		}
 	}
 }
