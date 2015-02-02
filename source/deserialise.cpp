@@ -13,9 +13,10 @@ string cutAway(string serial, int length);
 vector<string> deserialise(string serial)
 {
 	string temp;
-	static vector<string> vec;
+	vector<string> vec;
 	int quantity, length;
 	
+
 	stringstream quantityStream(cutOut(serial, 4)), lengthStream(cutOut(cutAway(serial, 4), 4));
 	//change string to int
 	while(1)
