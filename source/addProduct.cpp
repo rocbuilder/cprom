@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <iomanip>
+#include <ctime>
 
 using namespace std;
 #include "addProduct.h"
@@ -12,6 +13,8 @@ void addProduct()
 	int noLocation, noTag;
 	double price;
 	long id;
+
+	srand(time(0));
 
 	fstream outProduct;
 	outProduct.open("product.txt", fstream::app);
