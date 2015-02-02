@@ -1,3 +1,10 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+//productName, price, location, stock, id, tag, (discount to be decided)
 #include "searchProduct.h"
 #include "deserialise.h"
 
@@ -6,6 +13,9 @@ int searchProduct(string search)
 	ifstream inProduct;
 	inProduct.open("product.txt");
 	
+	location.clear();
+	tag.clear();
+
 	string locationSerial, tagSerial; //discountSerial;
 
 	if (!inProduct)
