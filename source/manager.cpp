@@ -1,19 +1,35 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 #include "manager.h"
 #include "addProduct.h"
+#include "searchProduct.h"
+#include "checkProduct.h"
 
 void manager()
 {
-	int choice = 1;
-	while(choice == 1)
+	string choice;
+
+	while (true)
 	{
-	addProduct();
-	cout<<"cont? 1 or 0";
-	cin>>choice;
-
+		cout<<"please enter choice: ";
+		cin>>choice;
+	
+		if (choice == "1")
+		{
+			while(true)
+			{
+				system("CLS");
+				addProduct();
+				cout<<"cont? 1 or 0";
+				cin>>choice;
+			}
+		}
+		if (choice == "2")
+		{
+				checkProduct();
+		}
 	}
-
 }
